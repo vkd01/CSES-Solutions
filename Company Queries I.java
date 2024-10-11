@@ -14,7 +14,7 @@ public class Main {
 
     public static void binary_lifting(int src, int par, ArrayList<ArrayList<Integer>> graph){
         dp[src][0] = par;
-        for(int i = 0;i<20;i++){
+        for(int i = 1;i<20;i++){
             if(dp[src][i-1] != -1){
                 dp[src][i] = dp[dp[src][i-1]][i-1];
             }
@@ -28,6 +28,8 @@ public class Main {
     }
 
     public static int query_dfs(int node, int level, ArrayList<ArrayList<Integer>> graph){
+        
+        //System.out.println(node + " "+ level);
 
         if(node == -1 || level == 0) return node;
 
@@ -37,7 +39,7 @@ public class Main {
             }
         }
 
-        return -1;
+        return node;
     }
 
     public static void jaiShreeRam__(FastScanner sc) {
@@ -50,14 +52,14 @@ public class Main {
             graph.add(new ArrayList<>());
         }
 
-        for(int i = 1;i<n;i++){
+        for(int i = 2;i<=n;i++){
             int u = sc.nextInt();
             int v = i;
             graph.get(u).add(v);
             graph.get(v).add(u);
         }
 
-        binary_lifting(1,1, graph);
+        binary_lifting(1,-1, graph);
 
         while(q-->0){
 
@@ -67,13 +69,7 @@ public class Main {
 
             System.out.println(query_dfs(node, level, graph));
 
-
-
         }
-
-
-
-
 
 
     }
